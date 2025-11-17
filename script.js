@@ -1,9 +1,11 @@
 const apiKey = "bb919b8fa830469ff94e93dc16d5091d";
-const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=germany";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+const search = document.querySelector(".search input");
+const btn = document.querySelector(".search button");
 
 // Extract data form api
-async function checkWeather() {
-    let response = await fetch(apiUrl + `&appid=${apiKey}`);
+async function checkWeather(city) {
+    let response = await fetch(apiUrl + city + `&appid=${apiKey}`);
     let data = await response.json();
     // Dispaly data
     document.querySelector(".city").textContent = data.name;
@@ -12,4 +14,7 @@ async function checkWeather() {
     document.querySelector(".humidity").textContent = data.main.humidity + "%";
 }
 
-checkWeather();
+//Add event listener listen input field
+btn.addEventListener("click",(e)=>{
+    checkWeather(search.value);
+})
