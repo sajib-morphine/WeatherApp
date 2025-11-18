@@ -8,7 +8,7 @@ async function checkWeather(city) {
     let response = await fetch(apiUrl + city + `&appid=${apiKey}`);
     //check error
     if(response.status == 404){
-      document.querySelector(".error").style.display = block;
+      document.querySelector(".error").style.display = "block";
       document.querySelector(".weather").style.display = "none";;
       
     }else{
