@@ -6,7 +6,13 @@ const weatherIcon = document.querySelector(".weather-icon");
 // Extract data form api
 async function checkWeather(city) {
     let response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-    let data = await response.json();
+    //check error
+    if(response.status == 404){
+      document.querySelector(".error").style.display = block;
+      document.querySelector(".weather").style.display = "none";;
+      
+    }else{
+      let data = await response.json();
     // Dispaly data
     document.querySelector(".city").textContent = data.name;
     document.querySelector(".temp").textContent = Math.round(data.main.temp) + "°C";
@@ -31,6 +37,8 @@ async function checkWeather(city) {
           weatherIcon.src = "./img/snow.png";
     }
     document.querySelector(".weather").style.display = "block";
+    }
+    
 }
 
 
